@@ -1,23 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [dogImage, setDogImage] = useState("");
+
+  const fetchDoggo = () => {
+    fetch(`https://dog.ceo/api/breeds/image/random`)
+      .then((res) => res.json())
+      .then((dogInfo) => setDogImage(dogInfo.message));
+  };
+
+  useEffect(() => {
+    if (dogImage === "") fetchDoggo();
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h3> Doggo of the day </h3>
+        <div>
+          <button onClick={() => fetchDoggo()}>New Doggo</button>
+        </div>
+        {dogImage !== "" ? (
+          <div>
+            <img src={dogImage} width="400px" alt="doggo" />
+          </div>
+        ) : (
+          <div>Loading Image </div>
+        )}
       </header>
     </div>
   );
