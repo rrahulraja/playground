@@ -1,9 +1,9 @@
 import { createBrowserHistory } from "history";
-import { Router, Route } from "react-router-dom";
 import React from "react";
+import { Route, Router } from "react-router-dom";
 import "./App.css";
-import RandomCat from "./RandomCat";
 import GreetingCat from "./GreetingCat";
+import RandomCat from "./RandomCat";
 
 const defaultHistory = createBrowserHistory();
 
